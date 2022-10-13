@@ -6,3 +6,8 @@ export interface Trip {
   destinations: string[];
   status: "NOT_STARTED" | "FINISHED" | "STARTED";
 }
+
+
+export interface Error {
+  title: string;
+}

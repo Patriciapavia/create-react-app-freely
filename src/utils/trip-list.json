@@ -15,7 +15,7 @@
     "destinations": ["New Zealand"],
     "status": "STARTED"
   },
- {
+  {
     "id": "3",
     "name": "Trip 3",
     "startDate": "2022-07-01",
