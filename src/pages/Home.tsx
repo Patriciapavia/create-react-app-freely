@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   formWrap: {
     backgroundColor: "white",
     padding: "20px 0px 20px 50px",
-
+    marginLeft: "450px",
     maxWidth: "400px",
   },
 }));
@@ -50,7 +50,6 @@ function Home() {
     vertical: "top",
     horizontal: "center",
   });
-  console.log(startDate);
 
   const destination = countrySelected.map(function (obj) {
     return obj.name;
@@ -62,8 +61,10 @@ function Home() {
     event.preventDefault();
 
     const valid = validate(name, setError, startDate, endDate, destination);
-
-    if (valid) {
+    console.log(typeof error);
+    if (!valid) {
+      setSnackbar({ open: true, vertical: "top", horizontal: "center" });
+    } else {
       setError("");
       setMessage("");
       dispatch(
@@ -77,6 +78,7 @@ function Home() {
         })
       );
       const resetForm = async () => {
+        setSnackbar({ open: true, vertical: "top", horizontal: "center" });
         await new Promise((resolve) => setTimeout(resolve, 2000));
         setName("");
         setEndDate("");
@@ -86,16 +88,12 @@ function Home() {
       setMessage("Trip successfully added");
 
       resetForm();
-      setSnackbar({ open: true, vertical: "top", horizontal: "center" });
     }
   };
 
-  function handleChange(event: any) {
-    const value = event.target.value;
-    if (!value.includes("_")) setError("You cannot use an underscore");
-    else setError("");
-    setMessage(value);
-  }
+  const handleSnackbarClose = () => {
+    setSnackbar({ open: false, vertical: "top", horizontal: "center" });
+  };
 
   const { formWrap } = useStyles();
 
@@ -106,15 +104,16 @@ function Home() {
           {" "}
           <h2>welcome to Freely</h2>
         </div>
-        {error && (
+        {/* {error && (
           <div style={{ color: "red", textAlign: "center" }}>{error}</div>
-        )}
+        )} */}
         <form onSubmit={addTripHandler}>
           <Snackbar
+            autoHideDuration={5000}
             anchorOrigin={{ vertical, horizontal }}
             open={open}
-            message={message}
-            autoHideDuration={1000}
+            message={error ? error : message ? message : ""}
+            onClose={handleSnackbarClose}
             key={vertical + horizontal}
           />
           <Grid container spacing={2}>

@@ -21,7 +21,7 @@ export const validate = (
     return;
   }
   if (startDate > endDate) {
-    setError("end date must be before start date");
+    setError("End date must be before start date");
     return;
   }
   if (!destination.length) {

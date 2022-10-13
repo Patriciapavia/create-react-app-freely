@@ -1,0 +1,13 @@
+@font-face {
+    font-family: 'SFProDisplay-Regular' ;
+    src: url('./assets/SFProDisplay-Regular.ttf') format('truetype');
+  
+  }
+
+
+  .wrapper{
+    font-family:'SFProDisplay-Regular';
+    background-color: #ECF0F4;
+    height: 100vh;
+
+  }
