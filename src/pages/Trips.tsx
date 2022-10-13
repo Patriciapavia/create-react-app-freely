@@ -2,33 +2,43 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import { useSelector } from "react-redux";
-import { Grid, Paper, Card, CardContent, Chip } from "@material-ui/core";
+import { Grid, Card, CardContent, Chip } from "@material-ui/core";
 import DialogComponent from "../components/Dialog";
 import { RootState } from "../store";
 
-function Trips() {
-  const tripList = useSelector((state: RootState) => state.trips.value);
+const useStyles = makeStyles((theme) => ({
+  item: {
+    backgroundColor: "#FFFFFF",
+    marginBottom: "4px",
+  },
+  cardHiglight: {
+    backgroundColor: "red",
+    width: "35vw",
+    height: "80px",
+    marginLeft: "40px",
+    fontSize: "14px",
+  },
+  card: {
+    backgroundColor: "#C6FBF8",
+    width: "35vw",
+    height: "80px",
+    marginLeft: "40px",
+    fontSize: "14px",
+  },
+}));
 
-  console.log(tripList);
+function Trips() {
+  const { item, card, cardHiglight } = useStyles();
+
+  const tripList = useSelector((state: RootState) => state.trips.value);
 
   return (
     <div style={{ width: "80vw" }}>
       <Grid container spacing={2}>
         {tripList.map((trip) => (
-          <Grid
-            item
-            xs={6}
-            key={trip.id}
-            style={{ backgroundColor: "#FFFFFF", marginBottom: "4px" }}
-          >
+          <Grid item xs={6} key={trip.id} className={item}>
             <Card
-              style={{
-                backgroundColor: "#C6FBF8",
-                width: "35vw",
-                height: "80px",
-                marginLeft: "40px",
-                fontSize: "14px",
-              }}
+              className={trip.status === "NOT_STARTED" ? cardHiglight : card}
             >
               <CardContent>
                 <Grid container spacing={2}>
