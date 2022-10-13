@@ -1,0 +1,43 @@
+
+
+
+  
+  
+  .nav-menu {
+    font-size: 2rem;
+    background: none;
+    background-color:#C6FBF8;
+    width: 250px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-right: 2rem;
+  }
+  .menu-bars{
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  /*  */
+  .active{
+  }
+  
+ 
+  
+  .nav-menu-items {
+    width: 100%;
+  }
+  
+  .navbar-toggle {
+    color: #FFFFFF;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+  
+  
