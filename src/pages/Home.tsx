@@ -1,39 +1,16 @@
 import React, { useState } from "react";
-import { Grid, Snackbar, SnackbarOrigin, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Snackbar, SnackbarOrigin } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { addTrip } from "../feature/Trip";
 import { Select, SelectOption } from "../components/Select";
 import { countries } from "../utils/countryArray";
 import { RootState } from "../store";
 import { validate } from "../components/Validator";
+
 export interface State extends SnackbarOrigin {
   open: boolean;
 }
 
-interface Key {
-  connected: boolean;
-  type: string;
-}
-
-const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
-  },
-  papper: {
-    padding: "20px",
-    width: "60vh",
-    height: "50vh",
-    backgroundColor: "#ECF0F4",
-  },
-
-  formWrap: {
-    backgroundColor: "white",
-    padding: "20px 0px 20px 50px",
-    marginLeft: "450px",
-    maxWidth: "400px",
-  },
-}));
 
 function Home() {
   const dispatch = useDispatch();
@@ -42,7 +19,8 @@ function Home() {
   const [name, setName] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
-  const [key, setKey] = useState(false);
+  const [key, setKey] = React.useState<any>(null);
+
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [snackbar, setSnackbar] = React.useState<State>({
@@ -50,6 +28,8 @@ function Home() {
     vertical: "top",
     horizontal: "center",
   });
+
+  console.log(startDate);
 
   const destination = countrySelected.map(function (obj) {
     return obj.name;
@@ -83,7 +63,8 @@ function Home() {
         setName("");
         setEndDate("");
         setStartDate("");
-        setKey((k) => !k);
+        setCountrySelected([]);
+        setKey((k: any) => !k);
       };
       setMessage("Trip successfully added");
 
@@ -95,18 +76,20 @@ function Home() {
     setSnackbar({ open: false, vertical: "top", horizontal: "center" });
   };
 
-  const { formWrap } = useStyles();
-
   return (
     <>
-      <div className={formWrap}>
+      <div
+        style={{
+          backgroundColor: "white",
+          padding: "20px 0px 20px 50px",
+          marginLeft: "450px",
+          maxWidth: "400px",
+        }}
+      >
         <div style={{ textAlign: "center" }}>
           {" "}
           <h2>welcome to Freely</h2>
         </div>
-        {/* {error && (
-          <div style={{ color: "red", textAlign: "center" }}>{error}</div>
-        )} */}
         <form onSubmit={addTripHandler}>
           <Snackbar
             autoHideDuration={5000}
@@ -140,7 +123,7 @@ function Home() {
             <Grid item xs={9}>
               <input
                 style={{ width: "210px" }}
-                // key={key}
+                key={key}
                 type="date"
                 onChange={(event) => {
                   setStartDate(event.target.value);
@@ -157,7 +140,7 @@ function Home() {
             <Grid item xs={9}>
               <input
                 style={{ width: "210px" }}
-                // key={key}
+                key={key}
                 type="date"
                 onChange={(event) => {
                   setEndDate(event.target.value);
