@@ -11,7 +11,6 @@ export interface State extends SnackbarOrigin {
   open: boolean;
 }
 
-
 function Home() {
   const dispatch = useDispatch();
   const tripList = useSelector((state: RootState) => state.trips.value);
@@ -41,7 +40,6 @@ function Home() {
     event.preventDefault();
 
     const valid = validate(name, setError, startDate, endDate, destination);
-    console.log(typeof error);
     if (!valid) {
       setSnackbar({ open: true, vertical: "top", horizontal: "center" });
     } else {
@@ -79,6 +77,7 @@ function Home() {
   return (
     <>
       <div
+        data-testid="home"
         style={{
           backgroundColor: "white",
           padding: "20px 0px 20px 50px",
@@ -153,7 +152,7 @@ function Home() {
 
           <Grid container spacing={2}>
             <Grid item xs={3}>
-              <label> Destination</label>
+              <label> Destination:</label>
             </Grid>
             <Grid item xs={9}>
               <Select

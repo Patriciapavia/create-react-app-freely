@@ -33,7 +33,7 @@ function Trips() {
   const tripList = useSelector((state: RootState) => state.trips.value);
 
   return (
-    <div style={{ width: "80vw" }}>
+    <div data-testid="trips" style={{ width: "80vw" }}>
       <Grid container spacing={2}>
         {tripList.map((trip) => (
           <Grid item xs={6} key={trip.id} className={item}>
@@ -49,7 +49,7 @@ function Trips() {
                     Start Date:{trip.startDate}
                   </Grid>
                   <Grid item xs={3}>
-                    End date
+                    End Date:
                     {trip.endDate}
                   </Grid>
                   <Grid item xs={3} style={{ marginTop: "-8px" }}>
